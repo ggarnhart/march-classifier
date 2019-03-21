@@ -1,10 +1,9 @@
 import pandas as pd
-import numpy as np  # Graphs and stuff
-# Seaborn is a library based on matplotlib and has nice functionalities for drawing graphs.
+import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 import time
-
+from IPython.display import display  # try to fix that display issue
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 
@@ -24,17 +23,17 @@ filename_glass = './glass.csv'
 df_glass = pd.read_csv(filename_glass)
 
 print(df_glass.shape)
+display(df_glass.head())
+display(df_glass.describe())
 
 
-def get_training_set(df, y_col, x_cols, ratio):
+def get_train_test(df, y_col, x_cols, ratio):
     """ 
-    This method transforms a dataframe (df) into a train and test set, for this you need to specify:
+    This method transforms a dataframe into a train and test set, for this you need to specify:
     1. the ratio train : test (usually 0.7)
     2. the column with the Y_values
     """
-
-    mask = np.random.rand(len(df))
-    # come back here, perhaps. idk if this is good yet
+    mask = np.random.rand(len(df)) < ratio
     df_train = df[mask]
     df_test = df[~mask]
 
@@ -47,21 +46,8 @@ def get_training_set(df, y_col, x_cols, ratio):
 
 y_col_glass = 'Type'
 x_cols_glass = list(df_glass.columns.values)
-x_cols_glass.remove(y_col_glass)
+# x_cols_glass.remove(y_col_glass)
 
 train_test_ratio = 0.7
-df_train, df_test, X_train, Y_train, X_test, Y_test = get_training_set(
+df_train, df_test, X_train, Y_train, X_test, Y_test = get_train_test(
     df_glass, y_col_glass, x_cols_glass, train_test_ratio)
-
-# Try all of the classifier types!
-
-dict_classifiers = {
-    "Logistic Regression": LogisticRegression(),
-    "Nearest Neighbors": KNeighborsClassifier(),
-    "Linear SVM": SVC(),
-    "Gradient Boosting Classifier": GradientBoostingClassifier(n_estimators=1000),
-    "Decision Tree": tree.DecisionTreeClassifier(),
-    "Random Forest": RandomForestClassifier(n_estimators=1000),
-    "Neural Net": MLPClassifier(alpha=1),
-    "Naive Bayes": GaussianNB()
-}
