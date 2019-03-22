@@ -2,6 +2,8 @@ from sklearn import metrics
 import numpy as np
 
 # Report various performance metrics for a classifier.
+
+
 def compute_metrics(classifier, X_test, y_test, classes):
 
     # Use the classifier to make predictions for the test set.
@@ -27,13 +29,16 @@ def compute_metrics(classifier, X_test, y_test, classes):
     # The confusion matrix as percentages.
     cm_percentage = 100 * cm_normalized
     print('Confusion matrix as percentages')
-    print(np.array2string(cm_percentage, formatter={'float_kind':lambda x: "%6.2f" % x}), '\n')
+    print(np.array2string(cm_percentage, formatter={
+          'float_kind': lambda x: "%6.2f" % x}), '\n')
 
     # Precision, recall, and f-score.
     print(metrics.classification_report(y_test, y_pred))
 
 # Read the MNIST data set.
-def read_mnist (file):
+
+
+def read_mnist(file):
     Z = np.load(file)
     m, n = Z.shape
     X = np.float64(Z[:, 0:n-1])

@@ -21,6 +21,8 @@ from sklearn.naive_bayes import GaussianNB
 # Local utilities. We're gonna use this to split the data.
 from csci416 import read_mnist, compute_metrics
 from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from classifyByBulk import batch_classify, display_dict_models
 
 data = pd.read_csv('data.csv')
 print("let's check the data")
@@ -31,9 +33,37 @@ f = open("data.csv")
 data_np = np.loadtxt(f, delimiter=',')  # LETS GOOOO
 m, n = data_np.shape
 X = data_np[:, 0:6]
-Y = data_np[:, 7]
+y = data_np[:, 7]
+classes = np.unique(y)
 
-# # Let's use the nice csci416 function to split the data pls.
-# test_size_amount = .7
-# X_train, X_test, y_train, y_test = train_test_split(
-#     X, y, test_size=test_size_amount, random_state=42)
+test_percentage = .7
+
+# At this point, the data should be parse-able.
+# i am choosing the random state seed, but idk if i need to
+print('data splitting time')
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=test_percentage, random_state=3)
+print('data finished splitting!')
+
+# now we have to do the pkl file thing
+output_file = 'GregsClassifier.pkl'
+# clf_pipline = Pipeline(steps=[('scale', MinMaxScaler())]) TODO: use this after best one is found
+
+# idk what classifier is going to work best, so we'll use all of them...
+dict_classifiers = {
+    "Logistic Regression": LogisticRegression(),
+    "Nearest Neighbors": KNeighborsClassifier(),
+    "Linear SVM": SVC(),
+    "Gradient Boosting Classifier": GradientBoostingClassifier(n_estimators=1000),
+    "Decision Tree": tree.DecisionTreeClassifier(),
+    "Random Forest": RandomForestClassifier(n_estimators=1000),
+    "Neural Net": MLPClassifier(alpha=1),
+    "Naive Bayes": GaussianNB()
+}
+
+# Let's test a bunch of them;)
+
+
+dict_models = batch_classify(
+    X_train, y_train, X_test, y_test, no_classifiers=8)
+display_dict_models(dict_models)
