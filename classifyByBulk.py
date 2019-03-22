@@ -9,6 +9,7 @@ from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.gaussian_process.kernels import RBF
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.naive_bayes import GaussianNB
+from sklearn.svm import LinearSVC
 
 import pandas as pd
 import numpy as np
@@ -21,11 +22,12 @@ dict_classifiers = {
     "Decision Tree": tree.DecisionTreeClassifier(),
     "Random Forest": RandomForestClassifier(n_estimators=1000),
     "Neural Net": MLPClassifier(alpha=1),
-    "Naive Bayes": GaussianNB()
+    "Naive Bayes": GaussianNB(),
+    "Linear SVC": LinearSVC()
 }
 
 
-def batch_classify(X_train, Y_train, X_test, Y_test, no_classifiers=5, verbose=True):
+def batch_classify(X_train, Y_train, X_test, Y_test, no_classifiers=9, verbose=True):
     """
     This method, takes as input the X, Y matrices of the Train and Test set.
     And fits them on all of the Classifiers specified in the dict_classifier.

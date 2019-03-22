@@ -1,0 +1,29 @@
+                    classifier  train_score  test_score  train_time
+2                    Linear SVM     1.000000    0.335556    9.007313
+5                 Random Forest     1.000000    0.334444   24.917936
+0           Logistic Regression     0.343185    0.333143    0.085265
+4                 Decision Tree     1.000000    0.332921    0.105958
+7                   Naive Bayes     0.347185    0.332730    0.017114
+1             Nearest Neighbors     0.546963    0.331619    0.024650
+3  Gradient Boosting Classifier     0.696519    0.331238   24.174440
+6                    Neural Net     0.340519    0.330222    3.192692
+
+Best: 
+0           Logistic Regression     0.343185    0.333143    0.085265
+
+Second:
+1             Nearest Neighbors     0.546963    0.331619    0.024650
+
+Third:
+2                    Linear SVM     1.000000    0.335556    9.007313 (idk why this isn't best)
+
+### ROUND TWO (It's about the same.)
+
+3  Gradient Boosting Classifier     0.695481    0.333238   22.964520
+5                 Random Forest     1.000000    0.332476   27.550325
+6                    Neural Net     0.355852    0.330571    2.984658
+4                 Decision Tree     1.000000    0.330190    0.098142
+2                    Linear SVM     1.000000    0.329683    7.866176
+7                   Naive Bayes     0.344963    0.329111    0.015683
+0           Logistic Regression     0.344741    0.328952    0.150160
+1             Nearest Neighbors     0.557333    0.326667    0.025558
