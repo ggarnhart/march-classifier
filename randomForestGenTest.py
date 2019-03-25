@@ -63,7 +63,7 @@ output_file = 'GregsClassifier.pkl'
 
 # try just this, first.
 clf_pipeline = Pipeline(
-    steps=[('classify', RandomForestClassifier())])  # decision tree = 34 %
+    steps=[('classify', RandomForestClassifier(min_samples_leaf=10))])  # decision tree = 34 %
 # print('training the SVC..', end='')
 start = time.time()
 clf_pipeline.fit(X_train, y_train)
