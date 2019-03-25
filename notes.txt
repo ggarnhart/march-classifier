@@ -27,3 +27,8 @@ Third:
 7                   Naive Bayes     0.344963    0.329111    0.015683
 0           Logistic Regression     0.344741    0.328952    0.150160
 1             Nearest Neighbors     0.557333    0.326667    0.025558
+
+
+# Linear SVC
+fit_intercept: No difference. Keep at True.
+Dual: no difference. Keep at True.

@@ -61,8 +61,8 @@ output_file = 'GregsClassifier.pkl'
 
 # try just this, first.
 clf_pipeline = Pipeline(
-    steps=[('scale', MinMaxScaler()), ('classify', LinearSVC())])
-print('training the SVC..', end='')
+    steps=[('classify', KNeighborsClassifier(n_neighbors=5, weights='distance', algorithm='kd_tree'))])  # n_neighbors has no effect. Distance weight upped it by 1% :)
+print('training the KNN..', end='')
 start = time.time()
 clf_pipeline.fit(X_train, y_train)
 stop = time.time()
