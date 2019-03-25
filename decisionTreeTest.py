@@ -26,6 +26,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from classifyByBulk import batch_classify, display_dict_models
 
+from sklearn.tree import DecisionTreeClassifier
 # we don't know what to do, so let's try everything.
 print()
 print()
@@ -62,7 +63,7 @@ output_file = 'GregsClassifier.pkl'
 
 # try just this, first.
 clf_pipeline = Pipeline(
-    steps=[('classify', LinearSVC(max_iter=2000))])  # linearSVC gets 34% using default params... Tol doesn't do much, crammer singer takes forever and doesn't do shit.
+    steps=[('classify', DecisionTreeClassifier(max_depth=5))])  # decision tree = 34 %
 # print('training the SVC..', end='')
 start = time.time()
 clf_pipeline.fit(X_train, y_train)

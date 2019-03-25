@@ -62,7 +62,7 @@ output_file = 'GregsClassifier.pkl'
 
 # try just this, first.
 clf_pipeline = Pipeline(
-    steps=[('classify', LinearSVC(max_iter=2000))])  # linearSVC gets 34% using default params... Tol doesn't do much, crammer singer takes forever and doesn't do shit.
+    steps=[('classify', SVC(decision_function_shape='ovr', gamma='scale'))])  # gamma scale didn't do much, linear scale literally ran for 10 mintutes and I stopped it, poly also ran for a while. Kernal basically did nothing
 # print('training the SVC..', end='')
 start = time.time()
 clf_pipeline.fit(X_train, y_train)
